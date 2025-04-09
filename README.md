@@ -1,3 +1,125 @@
+# 🪙 Telegram Chat Mining Bot
+
+A minimalist Telegram chat mining bot that rewards users with points for participating in group conversations. Once they reach a certain threshold, users can bind their wallet address and request a payout in any crypto token (e.g. BNB, MATIC, TON) preconfigured by the admin.
+
+Built with Python using `python-telegram-bot`, this bot is ideal for community engagement or airdrop-style reward programs.
+
+---
+
+## ✨ Features
+
+- ✅ Listens to group messages and tracks user activity
+- ✅ Implements cooldown logic (1 point every 60 seconds max per user)
+- ✅ Users can bind a wallet address via `/bind`
+- ✅ Users can check their balance via `/balance`
+- ✅ Users can request a withdrawal via `/withdraw`
+- ✅ Admin can set the reward token via `/settoken`
+- ✅ Supports button-based UI via `/menu` with inline buttons
+
+---
+
+## 🧱 Project Structure
+
+```bash
+telegram_bot/
+├── bot.py              # Bot launcher
+├── commands.py         # Command and button handlers
+├── config.py           # Global settings (Token, cooldown, thresholds)
+├── database.py         # SQLite-based point and wallet storage
+├── requirements.txt    # Required Python libraries
+├── .env                # Telegram token and admin ID (private)
+└── data.db             # SQLite DB file (auto-generated)
+⚙️ Setup Instructions
+1. Clone the repository
+bash
+Copy
+Edit
+git clone https://github.com/yourname/telegram-chat-mining-bot.git
+cd telegram-chat-mining-bot
+2. (Optional) Create a virtual environment
+bash
+Copy
+Edit
+python3 -m venv venv
+source venv/bin/activate
+3. Install dependencies
+bash
+Copy
+Edit
+pip install -r requirements.txt
+4. Create a .env file
+In the root folder, create a .env file:
+
+ini
+Copy
+Edit
+TOKEN=YourTelegramBotToken
+ADMIN_ID=YourNumericTelegramUserID
+To get your numeric Telegram ID, use @userinfobot
+
+🚀 Run the bot
+bash
+Copy
+Edit
+python bot.py
+✅ Group Setup Guide (Important)
+Disable Privacy Mode (required!)
+
+Chat with @BotFather
+
+/mybots → select your bot → Bot Settings
+
+Group Privacy → select Turn Off
+
+Add the bot to your group
+
+Group settings → Add member → Search your bot → Add
+
+Type /menu or simply start chatting to earn points!
+
+💬 Available Commands
+Command	Description
+/bind <addr>	Bind your crypto wallet via private chat
+/balance	Check your point balance & wallet
+/withdraw	Request a token payout
+/menu	Show interactive button menu
+/settoken	Admin-only: set the reward token
+🧠 Mining Logic
+Every user gets 1 point per 60 seconds max (cooldown-based)
+
+Meaningless spam is ignored (basic cooldown control)
+
+Once a user reaches the minimum threshold (default 100 points), they can request a payout
+
+Withdrawals are sent to the bound wallet address, processed by admin manually or via script
+
+🛠 Data Storage
+All user activity and wallet bindings are stored in data.db (SQLite)
+
+You can inspect or export data using sqlite3 CLI or any SQLite browser
+
+🔐 Security Tips
+Keep your .env file private – never commit your token or admin ID
+
+If you later automate token transfers, protect any private keys used to send tokens!
+
+💡 Future Ideas (Pull Requests Welcome!)
+Group leaderboard /leaderboard
+
+Blockchain auto-transfer integration (via Web3)
+
+Admin dashboard with web UI
+
+Multi-token and multi-group support
+
+NFT or gamified reward extensions
+
+📄 License
+MIT License
+
+🤝 Contact & Contribution
+Feel free to submit issues or PRs. You’re welcome to use this bot as a base for your own community reward project!
+
 # telegram_ranking_bot# 🪙 Telegram Chat Mining Bot
 
 一个极简版本的 Telegram 聊天挖矿机器人，用户只需在群中正常发言，即可自动获得积分奖励，积分累计到一定数额后可绑定钱包地址进行提现，管理员可提前设置奖励币种（如 BNB、MATIC、TON 等）。
